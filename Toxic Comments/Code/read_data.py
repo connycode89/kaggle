@@ -5,6 +5,8 @@ Created on Wed Jan 03 16:21:08 2018
 @author: cdonovan
 """
 
+# Python 2.7
+
 import os
 import pandas as pd
 import numpy as np
@@ -18,11 +20,3 @@ for item in filter(lambda x:'.csv' in x, dir_conts):
 
 sample, test, train = (data_dict[item] for item in data_dict.keys())
 del data_dict, dir_conts, item
-
-# train data
-num_cols = train[train.columns[2:]]
-row_sums = np.sum(num_cols, axis=1)
-worst = train.loc[np.argwhere(row_sums==np.amax(row_sums)).flatten()]
-more_than1 = train.loc[row_sums[row_sums>1].index]
-just_1 = train.loc[row_sums[row_sums==1].index]
-none = train.loc[row_sums[row_sums==0].index]
